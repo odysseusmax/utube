@@ -4,37 +4,6 @@
   "repository": "https://github.com/odysseusmax/utube",
   "logo": "https://github.com/odysseusmax/utube/blob/master/ss/logo.jpeg"
   "keywords": ["telegram", "youtube", "uploader"],
-  "env": {
-      "BOT_TOKEN": {
-      "description": "Your Bot token.",
-      "value": ""
-    },
-    "APP_ID": {
-      "description": "Your API_ID, Refer project docs.",
-      "value": ""
-    },
-    "API_HASH": {
-      "description": "Your API_ID, Refer project docs.",
-      "value": ""
-    },
-    "CLIENT_ID": {
-      "description": "Your Google CLIENT_ID, Refer project docs.",
-      "value": ""
-    },
-    "CLIENT_SECRET": {
-      "description": "Your Google CLIENT_SECRET, Refer project docs.",
-      "value": ""
-    },
-    "BOT_OWNER": {
-      "description": "Your Telegram id.",
-      "value": ""
-    },
-    "AUTH_USERS": {
-      "description": "Telegram id of authorised users, separated by comma",
-      "value": "",
-      "required": "false"
-    }
-  },
   "buildpacks": [
     {
         "url": "heroku/python"
