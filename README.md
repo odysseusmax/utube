@@ -76,6 +76,13 @@ python3 bot.py
 ```
 If you did everything correctly, the bot should be running. Go do `/atart` to see if the bot is live or not. Follow the instructions provided by bot to setup authorisation and to start uploading.
 
+
+**Or the easy way of directly deploying to heroku**
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+
+
 ### Status
 
 This project is actively maintained and will continue so until I'm tired of it.
@@ -90,7 +97,7 @@ This project is actively maintained and will continue so until I'm tired of it.
 
 ### Screenshots
 <p align="center">
-           
+
 <img  width="25%" height="25%" src="https://github.com/odysseusmax/utube/blob/master/ss/overview.jpg">
 
 <img  width="25%" height="25%" src="https://github.com/odysseusmax/utube/blob/master/ss/bot-start.jpg">
