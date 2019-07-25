@@ -2,6 +2,7 @@
   "name": "YoutubeUploadBot",
   "description": "Telegram to YouTube Uploader Bot",
   "repository": "https://github.com/odysseusmax/utube",
+  "logo": "https://github.com/odysseusmax/utube/blob/master/ss/logo.jpeg"
   "keywords": ["telegram", "youtube", "uploader"],
   "env": {
       "BOT_TOKEN": {
@@ -31,7 +32,7 @@
     "AUTH_USERS": {
       "description": "Telegram id of authorised users, separated by comma",
       "value": "",
-      "required":false
+      "required": "false"
     }
   },
   "buildpacks": [
