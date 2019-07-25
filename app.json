@@ -9,7 +9,7 @@
       "description": "Your Bot token.",
       "value": ""
     },
-    "APP_ID": {
+    "API_ID": {
       "description": "Your API_ID, Refer project docs.",
       "value": ""
     },

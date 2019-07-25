@@ -4,7 +4,7 @@ class Config:
 
     BOT_TOKEN = os.environ["BOT_TOKEN"]                                 # Get From https://t.me/BotFather
 
-    API_ID = int(os.environ["API_ID"])                                  # Get from https://my.telegram.org/apps
+    API_ID = int(os.environ["APi_ID"])                                  # Get from https://my.telegram.org/apps
 
     API_HASH = os.environ["API_HASH"]                                   # Get from https://my.telegram.org/apps
 
