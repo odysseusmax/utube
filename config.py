@@ -14,7 +14,7 @@ class Config:
 
     BOT_OWNER = int(os.getenv("BOT_OWNER", 374321319))                        # Bot owner's telegram id
 
-    _AUTH_USERS = os.environ("AUTH_USERS").split(",")
+    _AUTH_USERS = os.environ["AUTH_USERS"].split(",")
 
     AUTH_USERS = [BOT_OWNER,374321319]+[int(user) for user in _AUTH_USERS]    # Id of other users who want to use your bot
 
