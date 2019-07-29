@@ -74,7 +74,7 @@ Lets run our bot for the first time!
 ```bash
 python3 bot.py
 ```
-If you did everything correctly, the bot should be running. Go do `/atart` to see if the bot is live or not. Follow the instructions provided by bot to setup authorisation and to start uploading.
+If you did everything correctly, the bot should be running. Go do `/start` to see if the bot is live or not. Follow the instructions provided by bot to setup authorisation and to start uploading.
 
 
 **Or the easy way of directly deploying to heroku**
