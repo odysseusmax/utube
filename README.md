@@ -14,6 +14,7 @@
 * [Status](https://github.com/odysseusmax/utube#status)
 * [Special Notes](https://github.com/odysseusmax/utube#special-notes)
 * [Screenshots](https://github.com/odysseusmax/utube#screenshots)
+* [Video Tutorial](https://github.com/odysseusmax/utube#video-tutorial)
 * [Contact](https://github.com/odysseusmax/utube#contact)
 
 ### Info
