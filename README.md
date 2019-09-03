@@ -113,7 +113,14 @@ This project is actively maintained and will continue so until I'm tired of it.
 
 ### Video Tutorial
 
-Watch the video tutorial [here.](https://www.youtube.com/watch?v=LSs8b5dMWIA "How To Make Telegram Bot For YouTube Videos Uploading")
+<p align="center">
+           <a href="http://www.youtube.com/watch?feature=player_embedded&v=LSs8b5dMWIA" target="_blank">
+                      <img src="http://img.youtube.com/vi/LSs8b5dMWIA/hqdefault.jpg" alt="How To Make Telegram Bot For YouTube Videos Uploading" />
+           </a>
+</p>
+<p align="center">
+           <b>Video Tutorial</b>
+</p>
 
 ### Contact
 
