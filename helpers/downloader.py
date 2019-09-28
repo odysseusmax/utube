@@ -37,12 +37,12 @@ class Downloader:
         return
 
 
-    async def _callback(self,c, cur, tot):
+    async def _callback(self, cur, tot):
         try:
             if(not self.callback):
                 return
             if(int(time.time()-self.last_time) > 6):
-                await self.callback(c, cur, tot, self.start_time, "Downloading...", *self.args)
+                await self.callback(cur, tot, self.start_time, "Downloading...", *self.args)
                 self.last_time = time.time()
 
         except:
