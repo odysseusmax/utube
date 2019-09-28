@@ -68,7 +68,7 @@ def valid_media(media):
     else:
         return False
 
-async def progress(c, cur, tot, start_time, status, snt):
+async def progress(cur, tot, start_time, status, snt):
     try:
         diff = int(time.time()-start_time)
 
