@@ -14,11 +14,7 @@ plugins = dict(
 )
 
 
-app = Client('youtube-upload', bot_token = Config.BOT_TOKEN,
+Client('youtube-upload', bot_token = Config.BOT_TOKEN,
     api_id = Config.API_ID, api_hash = Config.API_HASH,
-    plugins = plugins
-)
-#~ CRED_FILE
-
-
-app.run()
+    plugins = plugins, workers = 6
+).run()
