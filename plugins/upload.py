@@ -71,9 +71,9 @@ def valid_media(media):
 
 async def progress(cur, tot, start_time, status, snt):
     try:
-        if int((cur * 100) / tot) % 2 == 0:
-            diff = int(time.time()-start_time)
-
+        diff = int(time.time()-start_time)
+        
+        if diff % 2 == 0:
             speed = round((cur/(1024**2))/diff,2)
 
             curr = round(cur/(1024**2), 2)
@@ -83,10 +83,8 @@ async def progress(cur, tot, start_time, status, snt):
             eta = datetime.timedelta(seconds=int(((tot-cur)/(1024*1024))/speed))
 
             progress = round((cur * 100) / tot,2)
-            
-            progress_ui = '*' * int((cur * 100) / (2*tot))
 
-            text = f"**{status}**\n\n`{progress}%` done.\n**[{progress_ui}]\n\n{curr}MB** of **{tott}MB**\nSpeed: **{speed}MBPS**\nETA: **{eta}**"
+            text = f"**{status}**\n\n`{progress}%` done.\n**{curr}MB** of **{tott}MB**\nSpeed: **{speed}MBPS**\nETA: **{eta}**"
 
             await snt.edit_text(text = text)
 
