@@ -84,7 +84,7 @@ async def progress(cur, tot, start_time, status, snt):
 
             progress = round((cur * 100) / tot,2)
             
-            progress_ui = '*' * int((cur * 100) / tot)/2
+            progress_ui = '*' * (int((cur * 100) / tot)/2)
 
             text = f"**{status}**\n\n`{progress}%` done.\n**[{progress_ui}]\n\n{curr}MB** of **{tott}MB**\nSpeed: **{speed}MBPS**\nETA: **{eta}**"
 
