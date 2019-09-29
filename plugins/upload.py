@@ -71,21 +71,24 @@ def valid_media(media):
 
 async def progress(cur, tot, start_time, status, snt):
     try:
-        diff = int(time.time()-start_time)
+        if int((cur * 100) / tot) % 2 == 0:
+            diff = int(time.time()-start_time)
 
-        speed = round((cur/(1024**2))/diff,2)
+            speed = round((cur/(1024**2))/diff,2)
 
-        curr = round(cur/(1024**2), 2)
+            curr = round(cur/(1024**2), 2)
 
-        tott = round(tot/(1024**2), 2)
+            tott = round(tot/(1024**2), 2)
 
-        eta = datetime.timedelta(seconds=int(((tot-cur)/(1024*1024))/speed))
+            eta = datetime.timedelta(seconds=int(((tot-cur)/(1024*1024))/speed))
 
-        progress = round((cur * 100) / tot,2)
+            progress = round((cur * 100) / tot,2)
+            
+            progress_ui = '*' * int((cur * 100) / tot)/2
 
-        text = f"**{status}**\n\n`{progress}%` done.\n**{curr}MB** of **{tott}MB**\nSpeed: **{speed}MBPS**\nETA: **{eta}**"
+            text = f"**{status}**\n\n`{progress}%` done.\n**[{progress_ui}]\n\n{curr}MB** of **{tott}MB**\nSpeed: **{speed}MBPS**\nETA: **{eta}**"
 
-        await snt.edit_text(text = text)
+            await snt.edit_text(text = text)
 
     except Exception as e:
         print(e)
