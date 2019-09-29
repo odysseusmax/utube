@@ -3,14 +3,18 @@ from youtube_upload.youtube import Youtube
 
 from config import Config
 
-import os, time, traceback
+from translations import Messages as tr
+
+import os
+import time
+import traceback
 
 class Uploader:
 
-    def __init__(self, c, m, file, title=None):
-        self.c = c
-        self.m = m
+    def __init__(self, file, title=None):
+        
         self.file = file
+        
         self.title = title
 
 
@@ -27,6 +31,13 @@ class Uploader:
         try:
 
             auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
+            
+            if not os.path.isfile(Config.CRED_FILE):
+                self.status = False
+                
+                self.message = "Upload failed because you did not authenticate me."
+                
+                return
 
             auth.LoadCredentialsFile(Config.CRED_FILE)
 
@@ -44,7 +55,7 @@ class Uploader:
             self.start_time = time.time()
             self.last_time = self.start_time
 
-            r = await youtube.upload_video(video = self.file, properties = properties, progress = self._callback)
+            r = await youtube.upload_video(video = self.file, properties = properties)
 
             self.status = True
             self.message = f"https://youtu.be/{r['id']}"
@@ -52,17 +63,5 @@ class Uploader:
             traceback.print_exc()
             self.status = False
             self.message = f"Error occuered during upload.\nError details: {e}"
-        return
-
-    async def _callback(self, cur, tot):
-        try:
-            if(self.progress):
-                if(int(time.time() - self.last_time) > 6):
-                    await self.progress(cur, tot, self.start_time, 'Uploading...', *self.args)
-                    self.last_time = time.time()
-        except Exception as e:
-            print(e)
-            pass
-
         return
 

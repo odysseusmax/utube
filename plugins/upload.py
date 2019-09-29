@@ -36,17 +36,18 @@ async def _upload(c, m):
         reply_to_message_id = m.message_id
     )
 
-    download = Downloader(c, m)
+    download = Downloader(m)
 
     status, file = await download.start(progress, snt)
 
     if(not status):
         await snt.edit_text(text = file, parse_mode='markdown')
+        
         return
 
     title = ' '.join(m.command[1:])
 
-    upload = Uploader(c, m, file, title)
+    upload = Uploader(file, title)
 
     status, link = await upload.start(progress, snt)
 

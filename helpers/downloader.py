@@ -2,8 +2,7 @@ import time, traceback
 
 class Downloader:
 
-    def __init__(self, c, m):
-        self.c = c
+    def __init__(m):
         self.m = m
 
 
@@ -19,15 +18,15 @@ class Downloader:
     async def _download(self):
         try:
             self.start_time = time.time()
-            self.last_time = self.start_time
-            self.file = await self.m.reply_to_message.download(progress = self._callback)
+            
+            self.downloaded_file = await self.m.reply_to_message.download(progress = self._callback)
 
-            if(not self.file):
+            if(not self.downloaded_file):
                 self.status = False
                 self.message = "Download failed!"
             else:
                 self.status = True
-                self.message = self.file
+                self.message = self.downloaded_file
 
         except Exception as e:
             traceback.print_exc()
@@ -41,9 +40,8 @@ class Downloader:
         try:
             if(not self.callback):
                 return
-            if(int(time.time()-self.last_time) > 6):
-                await self.callback(cur, tot, self.start_time, "Downloading...", *self.args)
-                self.last_time = time.time()
+            
+            await self.callback(cur, tot, self.start_time, "Downloading...", *self.args)
 
         except:
             pass
