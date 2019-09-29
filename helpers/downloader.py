@@ -2,7 +2,7 @@ import time, traceback
 
 class Downloader:
 
-    def __init__(m):
+    def __init__(self, m):
         self.m = m
 
 
