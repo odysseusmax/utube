@@ -58,7 +58,7 @@ class Uploader:
         try:
             if(self.progress):
                 if(int(time.time() - self.last_time) > 6):
-                    await self.progress(self.c, cur, tot, self.start_time, 'Uploading...', *self.args)
+                    await self.progress(cur, tot, self.start_time, 'Uploading...', *self.args)
                     self.last_time = time.time()
         except Exception as e:
             print(e)
