@@ -54,9 +54,6 @@ async def _upload(c, m):
     await snt.edit_text(text = link, parse_mode='markdown')
 
 
-
-
-
 def valid_media(media):
     if(media.video):
         return True
@@ -68,6 +65,7 @@ def valid_media(media):
         return True
     else:
         return False
+
 
 async def progress(cur, tot, start_time, status, snt):
     try:
