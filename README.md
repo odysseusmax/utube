@@ -39,13 +39,13 @@ This is a simple hobby project which i was really curious about to impliment. Th
 **Clone and setup virtual environment**
 
 ``` bash
-git clone https://github.com/odysseusmax/utube.git
+$ git clone https://github.com/odysseusmax/utube.git
 
-cd utube
+$ cd utube
 
-virtualenv .
+$ virtualenv venv
 
-source bin/activate
+$ source venv/bin/activate
 
 ```
 
@@ -66,14 +66,14 @@ source bin/activate
 With all the above procedures done, its time to install our dependencies.
 Run :
 ```bash
-pip3 install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 **Run bot**
 
 Lets run our bot for the first time!
 ```bash
-python3 bot.py
+$ python3 bot.py
 ```
 If you did everything correctly, the bot should be running. Go do `/start` to see if the bot is live or not. Follow the instructions provided by bot to setup authorisation and to start uploading.
 
