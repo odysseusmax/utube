@@ -8,14 +8,14 @@
 
 ### Contents
 
-* [Info](https://github.com/odysseusmax/utube#info)
-* [Libraries Used](https://github.com/odysseusmax/utube#libraries-used)
-* [Setup](https://github.com/odysseusmax/utube#setup)
-* [Status](https://github.com/odysseusmax/utube#status)
-* [Special Notes](https://github.com/odysseusmax/utube#special-notes)
-* [Screenshots](https://github.com/odysseusmax/utube#screenshots)
-* [Video Tutorial](https://github.com/odysseusmax/utube#video-tutorial)
-* [Contact](https://github.com/odysseusmax/utube#contact)
+* [Info](#info)
+* [Libraries Used](#libraries-used)
+* [Setup](#setup)
+* [Status](#status)
+* [Special Notes](#special-notes)
+* [Screenshots](#screenshots)
+* [Video Tutorial](#video-tutorial)
+* [Contact](#contact)
 
 ### Info
 
@@ -55,7 +55,7 @@ $ source venv/bin/activate
 
 * Head to [Google console](https://console.developers.google.com "Google console"), create a new project named `Youtube Uploader` and enable `API'S AND SERVISES`. Search for `YOUTUBE DATA API v3` and enable the API. Go to [Credentials](https://console.developers.google.com/apis/credentials "Credentials") page, select your project `Youtube Uploader` create a new credential with `other` as type. Copy the `CLIENT_ID` and `CLIENT_SECRET` and paste them to `config.py`
 
-* Head to [Bot Father](https://t.me/BotFather "Bot FAther"), create new bot and paste the bot token to `BOT_TOKEN`
+* Head to [Bot Father](https://t.me/BotFather "Bot Father"), create new bot and paste the bot token to `BOT_TOKEN`
 
 * Paste the bot owner's Telegram id to `BOT_OWNER` and add `AUTH_USERS` if you need others to use your bot.
 
@@ -99,15 +99,15 @@ This project is actively maintained and will continue so until I'm tired of it.
 ### Screenshots
 <p align="center">
 
-<img  width="25%" height="25%" src="https://github.com/odysseusmax/utube/blob/master/ss/overview.jpg">
+<img  width="25%" height="25%" src="./ss/overview.jpg">
 
-<img  width="25%" height="25%" src="https://github.com/odysseusmax/utube/blob/master/ss/bot-start.jpg">
+<img  width="25%" height="25%" src="./ss/bot-start.jpg">
 
-<img  width="25%" height="25%" src="https://github.com/odysseusmax/utube/blob/master/ss/bot-help.jpg">
+<img  width="25%" height="25%" src="./ss/bot-help.jpg">
 
-<img  width="25%" height="25%" src="https://github.com/odysseusmax/utube/blob/master/ss/bot-authorise.jpg">
+<img  width="25%" height="25%" src="./ss/bot-authorise.jpg">
 
-<img  width="25%" height="25%" alt="Upload" src="https://github.com/odysseusmax/utube/blob/master/ss/bot-upload.jpg">
+<img  width="25%" height="25%" alt="Upload" src="./ss/bot-upload.jpg">
 
 </p>
 
