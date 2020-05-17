@@ -9,6 +9,11 @@
       "description": "Your Bot token.",
       "value": ""
     },
+    "SESSION_NAME": {
+      "description": "Your Bot's username.",
+      "value": "youtubeitbot",
+      "required":false
+    },
     "API_ID": {
       "description": "Your API_ID, Refer project docs.",
       "value": ""

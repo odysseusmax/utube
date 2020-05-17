@@ -1,4 +1,5 @@
-import time, traceback
+import time
+import traceback
 
 class Downloader:
 

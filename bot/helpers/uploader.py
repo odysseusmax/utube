@@ -1,20 +1,19 @@
-from youtube_upload.auth import GoogleAuth
-from youtube_upload.youtube import Youtube
-
-from config import Config
-
-from translations import Messages as tr
-
 import os
 import time
 import traceback
+
+from youtube_upload.auth import GoogleAuth
+from youtube_upload.youtube import Youtube
+
+from ..config import Config
+from ..translations import Messages as tr
+
 
 class Uploader:
 
     def __init__(self, file, title=None):
         
         self.file = file
-        
         self.title = title
 
 
@@ -45,7 +44,7 @@ class Uploader:
 
             properties = dict(
                 title = self.title if self.title else os.path.basename(self.file),
-                description = 'Uploaded to youtube with https://t.me/youtubeitbot',
+                description = 'Uploaded to youtube with https://tx.me/youtubeitbot',
                 category = 27,
                 privacyStatus = 'private'
             )

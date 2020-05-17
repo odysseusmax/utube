@@ -1,8 +1,5 @@
 # [Youtube Uploader Bot](https://t.me/youtubeitbot)
 
-
-
-
 > Simple [Telegram Bot](https://core.telegram.org/bots "Telegram Bots") to Upload videos to [Youtube](https://youtube.com "Youtube") written in Python3.
 
 
@@ -16,25 +13,20 @@
 * [Screenshots](#screenshots)
 * [Video Tutorial](#video-tutorial)
 * [Contact](#contact)
+* [License](#license)
 
 ### Info
 
-This is a simple hobby project which i was really curious about to impliment. This is a Telegram bot which uses [Youtube Data API v3](https://developers.google.com/youtube/v3/ "Youtube Data API v3") to upload videos to Youtube. This bot uses [OAuth 2.0](https://en.wikipedia.org/wiki/OAuth#OAuth_2.0 "OAuth 2,0") to connect to your Youtube Channel.
+This is a simple hobby project which I was really curious about to implement. This is a Telegram bot which uses [Youtube Data API v3](https://developers.google.com/youtube/v3/ "Youtube Data API v3") to upload videos to Youtube.
 
 ### Libraries Used
 
-<details>
-           <summary>Pyrogram</summary>
-           <p><a href="https://github.com/pyrogram/pyrogram">Pyrogram</a> is used to connect the bot with telegram servers.</p>
-</details>
-<details>
-           <summary>Google Client API</summary>
-           <p><a href="https://github.com/googleapis/google-api-python-client">Google Client API</a> is used to connect the bot with Google and then with Youtube.</p>
-</details>
+* [Pyrogram](https://github.com/pyrogram/pyrogram "Pyrogram")
+* [Google Client API](https://github.com/googleapis/google-api-python-client "Google Client API")
 
 ### Setup
 
-:heavy_exclamation_mark: This project requires [Python3.7](https://www.python.org/downloads/release/python-370 "Python3.7") (as this was written and tested with Python 3.7.3, try and see if it works with other versions)
+:heavy_exclamation_mark: This project requires Python3.6 or higher
 
 **Clone and setup virtual environment**
 
@@ -49,21 +41,22 @@ $ source venv/bin/activate
 
 ```
 
-**Setup config.py**
+**Environment Variables**
 
-* Head to [Manage Apps](https://my.telegram.org) and get your `API_ID` and `API_HASH`, and save it at the respective positions in `config.py`
+* `BOT_TOKEN`(Required) - Get your bot token from [Bot Father](https://tx.me/BotFather "Bot Father").
+* `SESSION_NAME`(optional) - Your bot's username.
+* `API_ID`(Required) - Your telegram api id, get from [Manage Apps](https://my.telegram.org).
+* `API_HASH`(Required) - Your telegram api hash, get from [Manage Apps](https://my.telegram.org).
+* `CLIENT_ID`(Required) - Your google client id.
+* `CLIENT_SECRET`(Required) - Your google client secret.
+* `BOT_OWNER`(Required) - Telegram id of bot owner.
+* `AUTH_USERS`(optional) - Telegram id's of authorised users, separated by `,`.
+
+**Getting your `CLIENT_ID` and `CLIENT_SECRET`**
 
 * Head to [Google console](https://console.developers.google.com "Google console"), create a new project named `Youtube Uploader` and enable `API'S AND SERVISES`. Search for `YOUTUBE DATA API v3` and enable the API. Go to [Credentials](https://console.developers.google.com/apis/credentials "Credentials") page, select your project `Youtube Uploader` create a new credential with `other` as type. Copy the `CLIENT_ID` and `CLIENT_SECRET` and paste them to `config.py`
 
-* Head to [Bot Father](https://t.me/BotFather "Bot Father"), create new bot and paste the bot token to `BOT_TOKEN`
-
-* Paste the bot owner's Telegram id to `BOT_OWNER` and add `AUTH_USERS` if you need others to use your bot.
-
-* _All the contents of `config.py` must be kept secret as they contain sensitive informations_
-
 **Install requirements**
-
-With all the above procedures done, its time to install our dependencies.
 Run :
 ```bash
 $ pip3 install -r requirements.txt
@@ -73,7 +66,7 @@ $ pip3 install -r requirements.txt
 
 Lets run our bot for the first time!
 ```bash
-$ python3 bot.py
+$ python3 -m bot
 ```
 If you did everything correctly, the bot should be running. Go do `/start` to see if the bot is live or not. Follow the instructions provided by bot to setup authorisation and to start uploading.
 
@@ -113,16 +106,11 @@ This project is actively maintained and will continue so until I'm tired of it.
 
 ### Video Tutorial
 
-<p align="center">
-           <a href="http://www.youtube.com/watch?feature=player_embedded&v=LSs8b5dMWIA" target="_blank">
-                      <img src="http://img.youtube.com/vi/LSs8b5dMWIA/hqdefault.jpg" alt="How To Make Telegram Bot For YouTube Videos Uploading" />
-           </a>
-</p>
-<p align="center">
-           <b>Video Tutorial</b>
-</p>
+Here's a YouTube tutorial video for deploying the bot on [Heroku](https://heroku.com/ "Heroku"). [Video Link](http://www.youtube.com/watch?v=LSs8b5dMWIA "Tutorial video for deploying to Heroku").
 
 ### Contact
 
-Share the FeedBack and Suggestions with me.
-You can contact me [Here](https://telegram.dog/odysseusmax "Contact me")
+You can contact me [@odysseusmax](https://telegram.dog/odysseusmax "odysseusmax").
+
+### License
+Code released under [GNU General Public License v3.0](LICENSE).

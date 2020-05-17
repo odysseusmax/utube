@@ -1,48 +1,49 @@
-from pyrogram import Client, Filters
+import os
+import time
+import datetime
 
-import time, datetime, os
+from pyrogram import Filters
 
-from translations import Messages as tr
-
-from helpers.downloader import Downloader
-
-from helpers.uploader import Uploader
-
-from config import Config
+from ..translations import Messages as tr
+from ..helpers.downloader import Downloader
+from ..helpers.uploader import Uploader
+from ..config import Config
+from ..utubebot import UtubeBot
 
 
-@Client.on_message(Filters.private & Filters.incoming & Filters.command(['upload']) & Filters.user(Config.AUTH_USERS))
+@UtubeBot.on_message(
+    Filters.private 
+    & Filters.incoming 
+    & Filters.command('upload') 
+    & Filters.user(Config.AUTH_USERS)
+)
 async def _upload(c, m):
-    if(not os.path.isfile(Config.CRED_FILE)):
-        await m.reply_text(text = tr.NOT_AUTHENTICATED_MSG)
+    if not os.path.exists(Config.CRED_FILE):
+        await m.reply_text(tr.NOT_AUTHENTICATED_MSG, True)
         return
 
-    if(not m.reply_to_message):
-        await m.reply_text(text = tr.NOT_A_REPLY_MSG)
+    if not m.reply_to_message:
+        await m.reply_text(tr.NOT_A_REPLY_MSG, True)
         return
 
     message = m.reply_to_message
 
-    if(not message.media):
-        await m.reply_text(text = tr.NOT_A_MEDIA_MSG)
+    if not message.media:
+        await m.reply_text(tr.NOT_A_MEDIA_MSG, True)
         return
 
-    if(not valid_media(message)):
-        await m.reply_text(text = tr.NOT_A_VALID_MEDIA_MSG)
+    if not valid_media(message):
+        await m.reply_text(tr.NOT_A_VALID_MEDIA_MSG, True)
         return
 
-    snt = await c.send_message(chat_id = m.chat.id,
-        text = tr.PROCESSING,
-        reply_to_message_id = m.message_id
-    )
+    snt = await m.reply_text(tr.PROCESSING, True)
 
     download = Downloader(m)
 
     status, file = await download.start(progress, snt)
 
-    if(not status):
+    if not status:
         await snt.edit_text(text = file, parse_mode='markdown')
-        
         return
 
     title = ' '.join(m.command[1:])
@@ -55,13 +56,13 @@ async def _upload(c, m):
 
 
 def valid_media(media):
-    if(media.video):
+    if media.video:
         return True
-    elif(media.video_note):
+    elif media.video_note:
         return True
-    elif(media.animation):
+    elif media.animation:
         return True
-    elif(media.document and 'video' in media.document.mime_type):
+    elif media.document and 'video' in media.document.mime_type:
         return True
     else:
         return False
