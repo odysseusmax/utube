@@ -12,7 +12,7 @@ from ..utubebot import UtubeBot
     Filters.private 
     & Filters.incoming
     & Filters.command('authorise')
-    & Filters.user(Config.AUTH_USERS)
+    & Filters.user()
 )
 async def _auth(c, m):
     if len(m.command) == 1:
