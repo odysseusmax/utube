@@ -32,8 +32,8 @@ def map_btns(pos):
 @UtubeBot.on_message(
     Filters.private
     & Filters.incoming
-    & Filters.command('help') 
-    & Filters.user(Config.AUTH_USERS)
+    & Filters.command('help')
+    & Filters.user()
 )
 async def _help(c, m):
 
