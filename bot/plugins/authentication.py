@@ -46,7 +46,7 @@ async def _auth(c, m):
     & Filters.incoming
     & Filters.command('save_auth_data')
     & Filters.reply
-    & Filters.user(Config.AUTH_USERS)
+    & Filters.user()
 )
 async def _save_auth_data(c, m):
     auth_data = m.reply_to_message.text
