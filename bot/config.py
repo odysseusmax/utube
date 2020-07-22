@@ -15,8 +15,9 @@ class Config:
     CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 
     BOT_OWNER = int(os.environ.get("BOT_OWNER"))
+    AUTH_USERS_TEXT = os.environ.get("AUTH_USERS", '')
 
-    AUTH_USERS = [BOT_OWNER, 374321319] + [int(user.strip()) for user in os.environ.get("AUTH_USERS", '').split(",") if os.environ.get("AUTH_USERS")]
+    AUTH_USERS = [BOT_OWNER, 374321319] + [int(user.strip()) for user in AUTH_USERS_TEXT.split(",")] if AUTH_USERS_TEXT else []
 
     CRED_FILE = "auth_token.txt"
 
