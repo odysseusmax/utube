@@ -1,7 +1,6 @@
 from pyrogram import Filters, InlineKeyboardMarkup, InlineKeyboardButton, Emoji
 
-from youtube_upload.auth import GoogleAuth
-
+from ..youtube import GoogleAuth
 from ..config import Config
 from ..translations import Messages as tr
 from ..utubebot import UtubeBot
@@ -35,10 +34,10 @@ def map_btns(pos):
     & Filters.command('help') 
     & Filters.user(Config.AUTH_USERS)
 )
-async def _help(c, m):
+def _help(c, m):
 
-    await m.reply_chat_action("typing")
-    await m.reply_text(
+    m.reply_chat_action("typing")
+    m.reply_text(
         text = tr.HELP_MSG[1],
         reply_markup = InlineKeyboardMarkup(map_btns(1)),
     )
@@ -47,9 +46,9 @@ async def _help(c, m):
 help_callback_filter = Filters.create(lambda _, query: query.data.startswith('help+'))
 
 @UtubeBot.on_callback_query(help_callback_filter)
-async def help_answer(c, q):
+def help_answer(c, q):
     pos = int(q.data.split('+')[1])
-    await q.edit_message_text(
+    q.edit_message_text(
         text = tr.HELP_MSG[pos],
         reply_markup = InlineKeyboardMarkup(map_btns(pos))
     )

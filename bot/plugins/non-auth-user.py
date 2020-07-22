@@ -9,5 +9,5 @@ from ..config import Config
     & Filters.incoming
     & ~Filters.user(Config.AUTH_USERS)
 )
-async def _non_auth_usr_msg(c, m):
-    await m.delete(True)
+def _non_auth_usr_msg(c, m):
+    m.delete(True)

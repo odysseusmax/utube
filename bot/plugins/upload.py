@@ -17,42 +17,42 @@ from ..utubebot import UtubeBot
     & Filters.command('upload') 
     & Filters.user(Config.AUTH_USERS)
 )
-async def _upload(c, m):
+def _upload(c, m):
     if not os.path.exists(Config.CRED_FILE):
-        await m.reply_text(tr.NOT_AUTHENTICATED_MSG, True)
+        m.reply_text(tr.NOT_AUTHENTICATED_MSG, True)
         return
 
     if not m.reply_to_message:
-        await m.reply_text(tr.NOT_A_REPLY_MSG, True)
+        m.reply_text(tr.NOT_A_REPLY_MSG, True)
         return
 
     message = m.reply_to_message
 
     if not message.media:
-        await m.reply_text(tr.NOT_A_MEDIA_MSG, True)
+        m.reply_text(tr.NOT_A_MEDIA_MSG, True)
         return
 
     if not valid_media(message):
-        await m.reply_text(tr.NOT_A_VALID_MEDIA_MSG, True)
+        m.reply_text(tr.NOT_A_VALID_MEDIA_MSG, True)
         return
 
-    snt = await m.reply_text(tr.PROCESSING, True)
+    snt = m.reply_text(tr.PROCESSING, True)
 
     download = Downloader(m)
 
-    status, file = await download.start(progress, snt)
+    status, file = download.start(progress, snt)
 
     if not status:
-        await snt.edit_text(text = file, parse_mode='markdown')
+        snt.edit_text(text = file, parse_mode='markdown')
         return
 
     title = ' '.join(m.command[1:])
 
     upload = Uploader(file, title)
 
-    status, link = await upload.start(progress, snt)
+    status, link = upload.start(progress, snt)
 
-    await snt.edit_text(text = link, parse_mode='markdown')
+    snt.edit_text(text = link, parse_mode='markdown')
 
 
 def valid_media(media):
@@ -68,24 +68,31 @@ def valid_media(media):
         return False
 
 
-async def progress(cur, tot, start_time, status, snt):
+def human_bytes(num, split=False):
+    base = 1024.0
+    sufix_list = ['B','KB','MB','GB','TB','PB','EB','ZB', 'YB']
+    for unit in sufix_list:
+        if abs(num) < base:
+            if split:
+                return round(num, 2), unit
+            return f"{round(num, 2)} {unit}"
+        num /= base
+
+
+def progress(cur, tot, start_time, status, snt):
     try:
         diff = int(time.time()-start_time)
         
-        if diff % 2 == 0:
-            speed = round((cur/(1024**2))/diff,2)
-
-            curr = round(cur/(1024**2), 2)
-
-            tott = round(tot/(1024**2), 2)
-
+        if time.time() % 5 == 0:
+            time.sleep(1)
+            speed, unit = human_bytes(cur/diff, True)
+            curr = human_bytes(cur)
+            tott = human_bytes(tot)
             eta = datetime.timedelta(seconds=int(((tot-cur)/(1024*1024))/speed))
-
-            progress = round((cur * 100) / tot,2)
-
-            text = f"**{status}**\n\n`{progress}%` done.\n**{curr}MB** of **{tott}MB**\nSpeed: **{speed}MBPS**\nETA: **{eta}**"
-
-            await snt.edit_text(text = text)
+            elapsed = datetime.timedelta(seconds=diff)
+            progress = round((cur * 100) / tot, 2)
+            text = f"{status}\n\n{progress}% done.\n{curr} of {tott}\nSpeed: {speed} {unit}PS\nETA: {eta}\nElapsed: {elapsed}"
+            snt.edit_text(text = text)
 
     except Exception as e:
         print(e)
