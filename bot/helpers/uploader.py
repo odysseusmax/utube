@@ -65,7 +65,7 @@ class Uploader:
             )
 
             youtube = YouTube(google)
-            r = await youtube.upload_video(video=self.file, properties=properties)
+            r = youtube.upload_video(video=self.file, properties=properties)
 
             video_id = r['id']
             self.status = True
