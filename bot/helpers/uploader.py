@@ -43,7 +43,6 @@ class Uploader:
 
     def _upload(self):
         try:
-
             auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
             
             if not os.path.isfile(Config.CRED_FILE):
@@ -53,15 +52,25 @@ class Uploader:
 
             auth.LoadCredentialsFile(Config.CRED_FILE)
             google = auth.authorize()
-            categoryId = random.choice(list(self.video_category))
+            if Config.VIDEO_CATEGORY and Config.VIDEO_CATEGORY in self.video_category:
+                categoryId = Config.VIDEO_CATEGORY
+            else:
+                categoryId = random.choice(list(self.video_category))
+            
             categoryName = self.video_category[categoryId]
             title = self.title if self.title else os.path.basename(self.file)
+            title = (Config.VIDEO_TITLE_PREFIX + title + Config.VIDEO_TITLE_SUFFIX).replace('<', '').replace('>', '')[:100]
+            description = (Config.VIDEO_DESCRIPTION + '\nUploaded to YouTube with https://tx.me/youtubeitbot')[:5000]
+            if not Config.UPLOAD_MODE:
+                privacyStatus = 'private'
+            else:
+                privacyStatus = Config.UPLOAD_MODE
             
             properties = dict(
                 title = title,
-                description = 'Uploaded to YouTube with https://tx.me/youtubeitbot',
+                description = description,
                 category = categoryId,
-                privacyStatus = 'private'
+                privacyStatus = privacyStatus
             )
 
             youtube = YouTube(google)
