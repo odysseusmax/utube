@@ -44,6 +44,7 @@ def _upload(c, m):
     snt = m.reply_text(tr.PROCESSING, True)
     c.counter += 1
     download_id = get_download_id(c.download_controller)
+    print(download_id)
     c.download_controller[download_id] = True
 
     download = Downloader(m)
