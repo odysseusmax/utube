@@ -69,8 +69,7 @@ def _upload(c, m):
 
 def get_download_id(storage):
     while True:
-        choice = string.ascii_letters.split()
-        download_id = ''.join([random.choice(choice) for i in range(3)])
+        download_id = ''.join([random.choice(string.ascii_letters) for i in range(3)])
         if download_id not in storage:
             break
     return download_id
