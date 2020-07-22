@@ -106,7 +106,7 @@ def progress(cur, tot, start_time, status, snt, c, download_id):
     try:
         diff = int(time.time()-start_time)
         
-        if (time.time() % 5 == 0) or (cur==tot):
+        if (int(time.time()) % 5 == 0) or (cur==tot):
             time.sleep(1)
             speed, unit = human_bytes(cur/diff, True)
             curr = human_bytes(cur)
