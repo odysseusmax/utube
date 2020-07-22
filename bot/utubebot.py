@@ -16,3 +16,5 @@ class UtubeBot(Client):
             workers = 6
         )
         self.DOWNLOAD_WORKERS = 6
+        self.counter = 0
+        self.download_controller = {}

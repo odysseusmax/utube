@@ -24,7 +24,7 @@ class Downloader:
 
             if not self.downloaded_file:
                 self.status = False
-                self.message = "Download failed!"
+                self.message = "Download failed either because user cancelled or telegram refused!"
             else:
                 self.status = True
                 self.message = self.downloaded_file
