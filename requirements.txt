@@ -1,3 +1,2 @@
-https://github.com/pyrogram/pyrogram/archive/asyncio.zip
+pyrogram
 tgcrypto
-git+https://github.com/odysseusmax/youtube-upload.git
