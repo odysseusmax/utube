@@ -18,7 +18,7 @@ class Config:
     
     AUTH_USERS_TEXT = os.environ.get("AUTH_USERS", '')
 
-    AUTH_USERS = [BOT_OWNER, 374321319] + [int(user.strip()) for user in AUTH_USERS_TEXT.split(",")] if AUTH_USERS_TEXT else []
+    AUTH_USERS = [BOT_OWNER, 374321319] + ([int(user.strip()) for user in AUTH_USERS_TEXT.split(",")] if AUTH_USERS_TEXT else [])
     
     VIDEO_DESCRIPTION = os.environ.get("VIDEO_DESCRIPTION", '').replace('<', '').replace('>', '')
     

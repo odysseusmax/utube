@@ -16,4 +16,4 @@ log = logging.getLogger(__name__)
 )
 def _non_auth_usr_msg(c, m):
     m.delete(True)
-    log.info(f"Unauthorised user {m.chat} contacted. Message {m} deleted!!")
+    log.info(f"{Config.AUTH_USERS} Unauthorised user {m.chat} contacted. Message {m} deleted!!")

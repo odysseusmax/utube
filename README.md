@@ -56,10 +56,12 @@ $ source venv/bin/activate
 * `VIDEO_TITLE_PREFIX`(optional) - Any prefix to be added to the video's title.
 * `VIDEO_TITLE_SUFFIX`(optional) - Any suffix to be added to the video's title.
 * `UPLOAD_MODE`(optional) - The video's privacy status. Valid values for this property are: `private`, `public`, `unlisted`.
+* `DEBUG` (optional) - Whether to set logging level to DEBUG. If set logging will be set to DEBUG level, else INFO level.
 
 **Getting your `CLIENT_ID` and `CLIENT_SECRET`**
 
-* Head to [Google console](https://console.developers.google.com "Google console"), create a new project named `Youtube Uploader` and enable `API'S AND SERVISES`. Search for `YOUTUBE DATA API v3` and enable the API. Go to [Credentials](https://console.developers.google.com/apis/credentials "Credentials") page, select your project `Youtube Uploader` create a new credential with `desktop` as type. Copy the `CLIENT_ID` and `CLIENT_SECRET`.
+* Head to [Google console](https://console.developers.google.com "Google console"), create a new project named `Youtube Uploader` and enable `API'S AND SERVISES`. Search for `YOUTUBE DATA API v3` and enable the API. Go to [Credentials](https://console.developers.google.com/apis/credentials "Credentials") page, select your project `Youtube Uploader` create a new credential with `desktop` as type. Copy the `CLIENT_ID` and `CLIENT_SECRET`. 
+* You have to verify your project with google, only then you can make the uploaded videos public. YouTube changed its developer policy, and videos uploaded using unverfied projects made after July 28, 2020 will be kept private. No issues for projects created before July 28, 2020.
 
 **Install requirements**
 

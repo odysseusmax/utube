@@ -63,6 +63,11 @@
       "description": "The video's privacy status. Valid values for this property are: private, public, unlisted",
       "value": "private",
       "required":false
+    },
+    "DEBUG": {
+      "description": "Pass any value to set logging to debug level.",
+      "value": "",
+      "required":false
     }
    },
    "buildpacks": [
