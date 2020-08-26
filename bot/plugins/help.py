@@ -1,4 +1,5 @@
-from pyrogram import Filters, InlineKeyboardMarkup, InlineKeyboardButton, Emoji
+from pyrogram import filters as Filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from ..youtube import GoogleAuth
 from ..config import Config
@@ -43,7 +44,7 @@ def _help(c, m):
     )
 
 
-help_callback_filter = Filters.create(lambda _, query: query.data.startswith('help+'))
+help_callback_filter = Filters.create(lambda _, __, query: query.data.startswith('help+'))
 
 @UtubeBot.on_callback_query(help_callback_filter)
 def help_answer(c, q):

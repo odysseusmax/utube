@@ -28,6 +28,8 @@ class Config:
     
     VIDEO_TITLE_SUFFIX = os.environ.get("VIDEO_TITLE_SUFFIX", '')
     
+    DEBUG = bool(os.environ.get("DEBUG"))
+    
     UPLOAD_MODE = os.environ.get("UPLOAD_MODE") or False
     if UPLOAD_MODE:
         if UPLOAD_MODE.lower() in ['private', 'public', 'unlisted']:

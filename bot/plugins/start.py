@@ -1,4 +1,5 @@
-from pyrogram import Filters, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram import filters as Filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from ..translations import Messages as tr
 from ..config import Config

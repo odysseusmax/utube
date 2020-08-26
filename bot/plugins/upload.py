@@ -2,15 +2,21 @@ import os
 import time
 import string
 import random
+import logging
 import datetime
 
-from pyrogram import Filters, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram import StopTransmission
+from pyrogram import filters as Filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from ..translations import Messages as tr
 from ..helpers.downloader import Downloader
 from ..helpers.uploader import Uploader
 from ..config import Config
 from ..utubebot import UtubeBot
+
+
+log = logging.getLogger(__name__)
 
 
 @UtubeBot.on_message(
@@ -48,6 +54,7 @@ def _upload(c, m):
 
     download = Downloader(m)
     status, file = download.start(progress, snt, c, download_id)
+    log.debug(status, file)
     c.download_controller.pop(download_id)
     
     if not status:
@@ -60,6 +67,7 @@ def _upload(c, m):
     title = ' '.join(m.command[1:])
     upload = Uploader(file, title)
     status, link = upload.start(progress, snt)
+    log.debug(status, link)
     if not status:
         c.counter -= 1
         c.counter = max(0, c.counter)
@@ -100,7 +108,7 @@ def human_bytes(num, split=False):
 
 def progress(cur, tot, start_time, status, snt, c, download_id):
     if not c.download_controller.get(download_id):
-        raise c.StopTransmission
+        raise StopTransmission
         
     try:
         diff = int(time.time()-start_time)
@@ -126,5 +134,5 @@ def progress(cur, tot, start_time, status, snt, c, download_id):
             )
 
     except Exception as e:
-        print(e)
+        log.info(e)
         pass

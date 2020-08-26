@@ -1,5 +1,9 @@
 import time
-import traceback
+import logging
+
+
+log = logging.getLogger(__name__)
+
 
 class Downloader:
 
@@ -21,6 +25,8 @@ class Downloader:
             self.start_time = time.time()
             
             self.downloaded_file = self.m.reply_to_message.download(progress = self._callback)
+            
+            log.debug(self.downloaded_file)
 
             if not self.downloaded_file:
                 self.status = False
@@ -30,7 +36,7 @@ class Downloader:
                 self.message = self.downloaded_file
 
         except Exception as e:
-            traceback.print_exc()
+            log.error(e, exc_info=True)
             self.status = False
             self.message = f"Error occuered during download.\nError details: {e}"
 

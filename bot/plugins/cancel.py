@@ -1,9 +1,9 @@
-from pyrogram import Filters
+from pyrogram import filters as Filters
 
 from ..utubebot import UtubeBot
 
 
-@UtubeBot.on_callback_query(Filters.create(lambda _, query: query.data.startswith('cncl+')))
+@UtubeBot.on_callback_query(Filters.create(lambda _, __, query: query.data.startswith('cncl+')))
 def cncl(c, q):
     _, pid = q.data.split('+')
     if not c.download_controller.get(pid, False):

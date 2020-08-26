@@ -1,11 +1,14 @@
-import traceback
+import logging
 
-from pyrogram import Filters
+from pyrogram import filters as Filters
 
 from ..youtube import GoogleAuth
 from ..config import Config
 from ..translations import Messages as tr
 from ..utubebot import UtubeBot
+
+
+log = logging.getLogger(__name__)
 
 
 @UtubeBot.on_message(
@@ -33,11 +36,13 @@ def _auth(c, m):
         with open(Config.CRED_FILE, 'r') as f:
             cred_data = f.read()
         
+        log.debug(f"Authentication success, auth data saved to {Config.CRED_FILE}")
+        
         msg2 = msg.reply_text(cred_data, parse_mode=None)
         msg2.reply_text("This is your authorisation data! Save this for later use. Reply /save_auth_data to the authorisation data to re authorise later. (helpful if you use Heroku)", True)
 
     except Exception as e:
-        traceback.print_exc()
+        log.error(e, exc_info=True)
         m.reply_text(tr.AUTH_FAILED_MSG.format(e), True)
 
 
@@ -59,7 +64,8 @@ def _save_auth_data(c, m):
         auth.authorize()
         
         m.reply_text(tr.AUTH_DATA_SAVE_SUCCESS, True)
+        log.debug(f"Authentication success, auth data saved to {Config.CRED_FILE}")
     except Exception as e:
-        traceback.print_exc()
+        log.error(e, exc_info=True)
         m.reply_text(tr.AUTH_FAILED_MSG.format(e), True)
     

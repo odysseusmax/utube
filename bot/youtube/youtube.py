@@ -1,6 +1,7 @@
 import os
 import time
 import random
+import logging
 
 import httplib2
 import http
@@ -8,10 +9,15 @@ from apiclient.http import MediaFileUpload
 from apiclient.errors import HttpError
 
 
+log = logging.getLogger(__name__)
+
+
 class MaxRetryExceeded(Exception):
     pass
+
 class UploadFailed(Exception):
     pass
+
 
 class YouTube:
 
@@ -85,7 +91,7 @@ class YouTube:
                 self.error = "A retriable error occurred: {}".format(e)
 
             if self.error is not None:
-                print(self.error)
+                log.debug(self.error)
                 self.retry += 1
 
                 if self.retry > self.MAX_RETRIES:
@@ -94,7 +100,7 @@ class YouTube:
                 max_sleep = 2 ** self.retry
                 sleep_seconds = random.random() * max_sleep
 
-                print("Sleeping {} seconds and then retrying...".format(sleep_seconds))
+                log.debug("Sleeping {} seconds and then retrying...".format(sleep_seconds))
                 time.sleep(sleep_seconds)
 
 

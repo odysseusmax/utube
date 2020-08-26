@@ -1,11 +1,14 @@
 import os
 import time
 import random
-import traceback
+import logging
 
 from ..youtube import GoogleAuth, YouTube
 from ..config import Config
 from ..translations import Messages as tr
+
+
+log = logging.getLogger(__name__)
 
 
 class Uploader:
@@ -46,6 +49,7 @@ class Uploader:
             auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
             
             if not os.path.isfile(Config.CRED_FILE):
+                log.debug(f"{Config.CRED_FILE} does not exist")
                 self.status = False
                 self.message = "Upload failed because you did not authenticate me."
                 return
@@ -72,15 +76,19 @@ class Uploader:
                 category = categoryId,
                 privacyStatus = privacyStatus
             )
+            
+            log.debug(f"payload for {self.file} : {properties}")
 
             youtube = YouTube(google)
             r = youtube.upload_video(video=self.file, properties=properties)
+            
+            log.debug(r)
 
             video_id = r['id']
             self.status = True
             self.message = f"[{title}](https://youtu.be/{video_id}) uploaded to YouTube under category {categoryId} ({categoryName})"
         except Exception as e:
-            traceback.print_exc()
+            log.error(e, exc_info=True)
             self.status = False
             self.message = f"Error occuered during upload.\nError details: {e}"
         
