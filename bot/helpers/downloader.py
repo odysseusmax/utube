@@ -9,13 +9,19 @@ class Downloader:
 
     def __init__(self, m):
         self.m = m
+        self.status = None
+        self.callback = None
+        self.args = None
+        self.message = None
+        self.start_time = None
+        self.downloaded_file = None
 
 
     async def start(self, progress=None, *args):
         self.callback = progress
         self.args = args
 
-        self._download()
+        await self._download()
 
         return self.status, self.message
 
