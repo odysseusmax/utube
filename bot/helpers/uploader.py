@@ -83,10 +83,7 @@ class Uploader:
             log.debug(f"payload for {self.file} : {properties}")
 
             youtube = YouTube(google)
-            def g_g(*args):
-                return youtube.upload_video(*args)
-            
-            r = await loop.run_in_executor(None, g_g, (self.file, properties))
+            r = await loop.run_in_executor(None, youtube.upload_video, self.file, properties)
             
             log.debug(r)
 
