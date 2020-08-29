@@ -11,7 +11,7 @@ class Downloader:
         self.m = m
 
 
-    def start(self, progress=None, *args):
+    async def start(self, progress=None, *args):
         self.callback = progress
         self.args = args
 
@@ -20,11 +20,11 @@ class Downloader:
         return self.status, self.message
 
 
-    def _download(self):
+    async def _download(self):
         try:
             self.start_time = time.time()
             
-            self.downloaded_file = self.m.reply_to_message.download(progress = self._callback)
+            self.downloaded_file = await self.m.reply_to_message.download(progress = self._callback)
             
             log.debug(self.downloaded_file)
 
@@ -41,8 +41,8 @@ class Downloader:
             self.message = f"Error occuered during download.\nError details: {e}"
 
 
-    def _callback(self, cur, tot):
+    async def _callback(self, cur, tot):
         if not self.callback:
             return
             
-        self.callback(cur, tot, self.start_time, "Downloading...", *self.args)
+        await self.callback(cur, tot, self.start_time, "Downloading...", *self.args)

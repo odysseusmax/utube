@@ -1,6 +1,7 @@
 import os
 import time
 import random
+import asyncio
 import logging
 
 from ..youtube import GoogleAuth, YouTube
@@ -35,17 +36,19 @@ class Uploader:
         }
 
 
-    def start(self, progress=None, *args):
+    async def start(self, progress=None, *args):
         self.progress = progress
         self.args = args
 
-        self._upload()
+        await self._upload()
 
         return self.status, self.message
 
 
     def _upload(self):
         try:
+            loop = asyncio.get_running_loop()
+
             auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
             
             if not os.path.isfile(Config.CRED_FILE):
@@ -80,7 +83,7 @@ class Uploader:
             log.debug(f"payload for {self.file} : {properties}")
 
             youtube = YouTube(google)
-            r = youtube.upload_video(video=self.file, properties=properties)
+            r = await loop.run_in_executor(None, youtube.upload_video, (self.file, properties))
             
             log.debug(r)
 
