@@ -45,7 +45,7 @@ class Uploader:
         return self.status, self.message
 
 
-    def _upload(self):
+    async def _upload(self):
         try:
             loop = asyncio.get_running_loop()
 
