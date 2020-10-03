@@ -35,7 +35,7 @@ $ git clone https://github.com/odysseusmax/utube.git
 
 $ cd utube
 
-$ virtualenv venv
+$ python3 -m venv venv
 
 $ source venv/bin/activate
 
@@ -61,7 +61,7 @@ $ source venv/bin/activate
 **Getting your `CLIENT_ID` and `CLIENT_SECRET`**
 
 * Head to [Google console](https://console.developers.google.com "Google console"), create a new project named `Youtube Uploader` and enable `API'S AND SERVISES`. Search for `YOUTUBE DATA API v3` and enable the API. Go to [Credentials](https://console.developers.google.com/apis/credentials "Credentials") page, select your project `Youtube Uploader` create a new credential with `desktop` as type. Copy the `CLIENT_ID` and `CLIENT_SECRET`. 
-* You have to verify your project with google, only then you can make the uploaded videos public. YouTube changed its developer policy, and videos uploaded using unverfied projects made after July 28, 2020 will be kept private. No issues for projects created before July 28, 2020.
+* You have to verify your application with google, only then you can make the uploaded videos public. YouTube changed its developer policy, and videos uploaded using unverfied applications will be kept private.
 
 **Install requirements**
 
@@ -81,7 +81,7 @@ If you did everything correctly, the bot should be running. Go do `/start` to se
 
 **Or the easy way of directly deploying to heroku**
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/odysseusmax/utube/tree/master)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 
