@@ -21,9 +21,9 @@ log = logging.getLogger(__name__)
 
 
 @UtubeBot.on_message(
-    Filters.private 
-    & Filters.incoming 
-    & Filters.command('upload') 
+    Filters.private
+    & Filters.incoming
+    & Filters.command('upload')
     & Filters.user(Config.AUTH_USERS)
 )
 async def _upload(c, m):
@@ -44,7 +44,7 @@ async def _upload(c, m):
     if not valid_media(message):
         await m.reply_text(tr.NOT_A_VALID_MEDIA_MSG, True)
         return
-    
+
     if c.counter >= 6:
         await m.reply_text(tr.DAILY_QOUTA_REACHED, True)
 
@@ -57,14 +57,17 @@ async def _upload(c, m):
     status, file = await download.start(progress, snt, c, download_id)
     log.debug(status, file)
     c.download_controller.pop(download_id)
-    
+
     if not status:
         c.counter -= 1
         c.counter = max(0, c.counter)
         await snt.edit_text(text = file, parse_mode='markdown')
         return
-    
-    await snt.edit_text("Downloaded to local, Now starting to upload to youtube...")
+
+    try:
+        await snt.edit_text("Downloaded to local, Now starting to upload to youtube...")
+    except:
+        pass
     title = ' '.join(m.command[1:])
     upload = Uploader(file, title)
     status, link = await upload.start(progress, snt)
@@ -110,10 +113,10 @@ def human_bytes(num, split=False):
 async def progress(cur, tot, start_time, status, snt, c, download_id):
     if not c.download_controller.get(download_id):
         raise StopTransmission
-        
+
     try:
         diff = int(time.time()-start_time)
-        
+
         if (int(time.time()) % 5 == 0) or (cur==tot):
             await asyncio.sleep(1)
             speed, unit = human_bytes(cur/diff, True)
@@ -124,7 +127,7 @@ async def progress(cur, tot, start_time, status, snt, c, download_id):
             progress = round((cur * 100) / tot, 2)
             text = f"{status}\n\n{progress}% done.\n{curr} of {tott}\nSpeed: {speed} {unit}PS\nETA: {eta}\nElapsed: {elapsed}"
             await snt.edit_text(
-                text = text, 
+                text = text,
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
