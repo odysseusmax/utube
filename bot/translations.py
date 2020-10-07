@@ -1,7 +1,7 @@
 
 class Messages:
 
-    START_MSG = "Hi there {}.\n\nI'm Youtube Uploader Bot.You can use me to upload any telegram video to youtube once you authorise me.You can know more from /help.\n\nThank you."
+    START_MSG = "**Hi there {}**.\n\n**I'm Youtube Uploader Bot.You can use me to upload any telegram video to youtube once you authorise me.You can know more from** /help.\n\n**ThankThank you**."
 
     HELP_MSG = [
         ".",
@@ -16,13 +16,13 @@ class Messages:
         "**Now lets authorise.**\n\nYou need to give me the access to upload videos to your Youtube account.For that open the given link and allow access and copy the code. Come back here and type `/authorise copied-code` and send it.\n\n**Fear not!**\nI'm not a hacker or someone who wants to creep into people's privacy. I respect one's privacy. I'm here just to help anyone who wants help. If I was a hacker I won't be sitting here writing Telegram Bots."
     ]
 
-    NOT_A_REPLY_MSG = "Please reply to some video file."
+    NOT_A_REPLY_MSG = "**Please reply to some video file.**"
 
-    NOT_A_MEDIA_MSG = "No media file found. "+NOT_A_REPLY_MSG
+    NOT_A_MEDIA_MSG = "**No media file found.** "+NOT_A_REPLY_MSG
 
-    NOT_A_VALID_MEDIA_MSG = "This is not a valid media"
+    NOT_A_VALID_MEDIA_MSG = "**This is not a valid media**"
     
-    DAILY_QOUTA_REACHED = "Looks like you are trying to upload more than 6 videos today! By default youtube only allows about 6 uploads daily, so this request might fail!!"
+    DAILY_QOUTA_REACHED = "**Looks like you are trying to upload more than 6 videos today! By default youtube only allows about 6 uploads daily, so this request might fail!!**"
 
     PROCESSING = "Processing....."
 
@@ -34,5 +34,5 @@ class Messages:
 
     AUTH_FAILED_MSG = "Authentication failed\nDetails:{}"
     
-    AUTH_DATA_SAVE_SUCCESS = "Successfully saved the given auth data!"
+    AUTH_DATA_SAVE_SUCCESS = "**Successfully saved the given auth data!**"
     
