@@ -39,7 +39,7 @@ async def _auth(c, m):
         log.debug(f"Authentication success, auth data saved to {Config.CRED_FILE}")
         
         msg2 = await msg.reply_text(cred_data, parse_mode=None)
-        await msg2.reply_text("This is your authorisation data! Save this for later use. Reply /save_auth_data to the authorisation data to re authorise later. (helpful if you use Heroku)", True)
+        await msg2.reply_text("This is your authorisation data! Save this for later use. Reply /save_auth_data to the authorisation data to re authorise later.", True)
 
     except Exception as e:
         log.error(e, exc_info=True)
