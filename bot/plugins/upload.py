@@ -5,10 +5,11 @@ import random
 import logging
 import asyncio
 import datetime
+from typing import Tuple, Union
 
 from pyrogram import StopTransmission
 from pyrogram import filters as Filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 from ..translations import Messages as tr
 from ..helpers.downloader import Downloader
@@ -23,10 +24,10 @@ log = logging.getLogger(__name__)
 @UtubeBot.on_message(
     Filters.private
     & Filters.incoming
-    & Filters.command('upload')
+    & Filters.command("upload")
     & Filters.user(Config.AUTH_USERS)
 )
-async def _upload(c, m):
+async def _upload(c: UtubeBot, m: Message):
     if not os.path.exists(Config.CRED_FILE):
         await m.reply_text(tr.NOT_AUTHENTICATED_MSG, True)
         return
@@ -61,47 +62,51 @@ async def _upload(c, m):
     if not status:
         c.counter -= 1
         c.counter = max(0, c.counter)
-        await snt.edit_text(text = file, parse_mode='markdown')
+        await snt.edit_text(text=file, parse_mode="markdown")
         return
 
     try:
         await snt.edit_text("Downloaded to local, Now starting to upload to youtube...")
-    except:
+    except Exception as e:
+        log.warning(e, exc_info=True)
         pass
-    title = ' '.join(m.command[1:])
+
+    title = " ".join(m.command[1:])
     upload = Uploader(file, title)
     status, link = await upload.start(progress, snt)
     log.debug(status, link)
     if not status:
         c.counter -= 1
         c.counter = max(0, c.counter)
-    await snt.edit_text(text = link, parse_mode='markdown')
+    await snt.edit_text(text=link, parse_mode="markdown")
 
 
-def get_download_id(storage):
+def get_download_id(storage: dict) -> str:
     while True:
-        download_id = ''.join([random.choice(string.ascii_letters) for i in range(3)])
+        download_id = "".join([random.choice(string.ascii_letters) for i in range(3)])
         if download_id not in storage:
             break
     return download_id
 
 
-def valid_media(media):
+def valid_media(media: Message) -> bool:
     if media.video:
         return True
     elif media.video_note:
         return True
     elif media.animation:
         return True
-    elif media.document and 'video' in media.document.mime_type:
+    elif media.document and "video" in media.document.mime_type:
         return True
     else:
         return False
 
 
-def human_bytes(num, split=False):
+def human_bytes(
+    num: Union[int, float], split: bool = False
+) -> Union[str, Tuple[int, str]]:
     base = 1024.0
-    sufix_list = ['B','KB','MB','GB','TB','PB','EB','ZB', 'YB']
+    sufix_list = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
     for unit in sufix_list:
         if abs(num) < base:
             if split:
@@ -110,31 +115,36 @@ def human_bytes(num, split=False):
         num /= base
 
 
-async def progress(cur, tot, start_time, status, snt, c, download_id):
+async def progress(
+    cur: Union[int, float],
+    tot: Union[int, float],
+    start_time: float,
+    status: str,
+    snt: Message,
+    c: UtubeBot,
+    download_id: str,
+):
     if not c.download_controller.get(download_id):
         raise StopTransmission
 
     try:
-        diff = int(time.time()-start_time)
+        diff = int(time.time() - start_time)
 
-        if (int(time.time()) % 5 == 0) or (cur==tot):
+        if (int(time.time()) % 5 == 0) or (cur == tot):
             await asyncio.sleep(1)
-            speed, unit = human_bytes(cur/diff, True)
+            speed, unit = human_bytes(cur / diff, True)
             curr = human_bytes(cur)
             tott = human_bytes(tot)
-            eta = datetime.timedelta(seconds=int(((tot-cur)/(1024*1024))/speed))
+            eta = datetime.timedelta(seconds=int(((tot - cur) / (1024 * 1024)) / speed))
             elapsed = datetime.timedelta(seconds=diff)
             progress = round((cur * 100) / tot, 2)
-            text = f"{status}\n\n{progress}% done.\n{curr} of {tott}\nSpeed: {speed} {unit}PS\nETA: {eta}\nElapsed: {elapsed}"
+            text = f"{status}\n\n{progress}% done.\n{curr} of {tott}\nSpeed: {speed} {unit}PS"
+            f"\nETA: {eta}\nElapsed: {elapsed}"
             await snt.edit_text(
-                text = text,
+                text=text,
                 reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton('Cancel!', f'cncl+{download_id}')
-                        ]
-                    ]
-                )
+                    [[InlineKeyboardButton("Cancel!", f"cncl+{download_id}")]]
+                ),
             )
 
     except Exception as e:
