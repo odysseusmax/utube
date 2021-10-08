@@ -119,3 +119,7 @@ You can contact me [@TharukRenuja](https://telegram.dog/TharukRenuja "TharukRenu
 ### License
 
 Code released under [GNU General Public License v3.0](LICENSE).
+
+###Credits
+
+-[odysseusmax](github.com/odysseusmax)
