@@ -120,6 +120,6 @@ You can contact me [@TharukRenuja](https://telegram.dog/TharukRenuja "TharukRenu
 
 Code released under [GNU General Public License v3.0](LICENSE).
 
-###Credits
+### Credits
 
--[odysseusmax](github.com/odysseusmax)
+[odysseusmax](github.com/odysseusmax)
