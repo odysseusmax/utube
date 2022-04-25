@@ -11,7 +11,7 @@
     },
     "SESSION_NAME": {
       "description": "Your Bot's username.",
-      "value": "youtubeitbot",
+      "value": "youtubeuplsunilbot",
       "required":false
     },
     "API_ID": {
