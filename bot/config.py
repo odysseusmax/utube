@@ -5,7 +5,7 @@ class Config:
 
     BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
-    SESSION_NAME = os.environ.get("SESSION_NAME", ":memory:")
+    NAME = os.environ.get("NAME", ":memory:")
 
     API_ID = int(os.environ.get("API_ID"))
 
