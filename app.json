@@ -9,9 +9,9 @@
       "description": "Your Bot token. Get from https://t.me/botfather",
       "value": ""
     },
-    "SESSION_NAME": {
+    "NAME": {
       "description": "Your Bot's username.",
-      "value": "youtubeitbot",
+      "value": "youtubeuplsunilbot",
       "required":false
     },
     "API_ID": {

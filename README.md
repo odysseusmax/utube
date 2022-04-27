@@ -43,7 +43,7 @@ $ source venv/bin/activate
 **Environment Variables**
 
 - `BOT_TOKEN`(Required) - Get your bot token from [Bot Father](https://tx.me/BotFather "Bot Father").
-- `SESSION_NAME`(optional) - Your bot's username.
+- `NAME`(optional) - Your bot's username.
 - `API_ID`(Required) - Your telegram api id, get from [Manage Apps](https://my.telegram.org).
 - `API_HASH`(Required) - Your telegram api hash, get from [Manage Apps](https://my.telegram.org).
 - `CLIENT_ID`(Required) - Your google client id.
