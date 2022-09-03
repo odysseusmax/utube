@@ -25,7 +25,7 @@ This is a simple hobby project which I was really curious about to implement. Th
 
 ### Setup
 
-:heavy_exclamation_mark: This project requires Python3.6 or higher
+:heavy_exclamation_mark: This project requires Python3.9.13 or higher
 
 **Clone and setup virtual environment**
 
