@@ -1,0 +1,17 @@
+# render.yaml
+
+services:
+  - name: Youtube-Uploader
+    env:
+      - key: API_ID
+        value: "your-key-value"
+    buildCommand: "pip3 install -r requirements.txt"
+    startCommand: "python3 -m bot"
+    sourceMount:
+      path: .
+    dockerfile: |
+      FROM python:3.9.15
+
+      WORKDIR /app
+
+      COPY . /app
