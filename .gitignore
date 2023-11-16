@@ -1,0 +1,6 @@
+*.session
+venv/
+__pycache__/
+auth_token.txt
+*.sh
+downloads/
