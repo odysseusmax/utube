@@ -38,9 +38,7 @@ class Downloader:
 
             if not self.downloaded_file:
                 self.status = False
-                self.message = (
-                    "Download failed either because user cancelled or telegram refused!"
-                )
+                self.message = "**Dᴏᴡɴʟᴏᴀᴅ ғᴀɪʟᴇᴅ💀**\n\n Reason --➤ either the user canceled the operation.❌ \n or Telegram declined the request! 🚷💀"
             else:
                 self.status = True
                 self.message = self.downloaded_file
@@ -48,10 +46,16 @@ class Downloader:
         except Exception as e:
             log.error(e, exc_info=True)
             self.status = False
-            self.message = f"Error occuered during download.\nError details: {e}"
+            self.message = f"Error⚠️ occurred during download.\nError details: {e}"
 
     async def _callback(self, cur: Union[int, float], tot: Union[int, float]) -> None:
         if not self.callback:
             return
 
-        await self.callback(cur, tot, self.start_time, "Downloading...", *self.args)
+        await self.callback(
+            cur,
+            tot,
+            self.start_time,
+            "ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ! ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ...",
+            *self.args,
+        )
