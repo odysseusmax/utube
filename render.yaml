@@ -2,6 +2,7 @@
 
 services:
   - name: Youtube-Uploader
+    type: web
     env:
       - key: API_ID
         value: "your-key-value"
