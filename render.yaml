@@ -1,18 +1,26 @@
-# render.yaml
-
 services:
-  - name: Youtube-Uploader
-    type: web
-    env:
-      - key: API_ID
-        value: "your-key-value"
-    buildCommand: "pip3 install -r requirements.txt"
-    startCommand: "python3 -m bot"
-    sourceMount:
-      path: .
-    dockerfile: |
-      FROM python:3.9.15
-
-      WORKDIR /app
-
-      COPY . /app
+  - type: web
+    name: utubeitbot
+    env: python
+    buildCommand: pip3 install -r requirements.txt
+    startCommand: python3 -m bot
+    repo: https://github.com/alpha-alexxx/utube
+    branch: master
+    envVars:
+      - key: API_ID 
+        sync: false
+      - key: API_HASH 
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: CLIENT_ID 
+        sync: false
+      - key: CLIENT_SECRET 
+        sync: false
+      - key: BOT_OWNER 
+        sync: false 
+      - key: AUTH_USERS 
+        sync: false
+      - key: UPLOAD_MODE
+        value: public
+    autoDeploy: true 
