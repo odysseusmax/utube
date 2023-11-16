@@ -12,6 +12,7 @@
 - [Screenshots](#screenshots)
 - [Video Tutorial](#video-tutorial)
 - [Contact](#contact)
+- [Commands](#commands)
 - [License](#license)
 
 ## Info
@@ -163,38 +164,65 @@ python3 -m bot
 
 If you did everything correctly, the bot should be running. Go do `/start` to see if the bot is live or not. Follow the instructions provided by bot to setup authorisation and to start uploading.
 
-**Or the easy way of directly deploying to Render**
+### Deploying to Render with Ease
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/alpha-alexxx/utube)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/select-repo?type=web)
 
+#### Instructions:
+
+1. **Public Git Repository:**
+   - Add this public Git repository URL: `https://github.com/odysseusmax/utube.git`
+
+2. **Name Your Service:**
+   - Provide a name for your service.
+   - In the "Advanced" tab, add a secret file named `.env` with all required environment variables.
+
+3. **Create Web Service:**
+   - Set up your web service configuration.
+
+4. **Wait for Deployment:**
+   - Monitor the deployment progress.
+   - Once completed, your site will be ![Live](https://img.shields.io/badge/live-brightgreen).
+
+5. **Configure Cron Job:**
+   - Copy the deployed website URL.
+   - Create an account on [CRON JOB](https://console.cron-job.org/signup) if you haven't already.
+   - [Create a new cron job](https://console.cron-job.org/jobs/create), providing a title and pasting your website URL.
+   - Click on **CREATE** or firstly, test run the cron job and then Create.
+
+---
+
+**Notes:**
+1. _Your bot is now live 24/7._
+2. _A cron job is set up to address Render's free service limitations, which may cause the service to stop every 15 minutes._
 
 ### Development Status
+[![Active](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://github.com/alpha-alexxx/YoutubeUploader)
 
-This project is actively maintained and will continue so until I'm tired of it.
+🚀 **Active Development:** I am currently actively working on this project, implementing new features, fixing issues, and making continuous improvements. Your contributions and feedback are always welcome!
 
 ### Special notes
+1. With the Youtube Data API you are awarded with 10,000 points of requests. For one video upload it costs 1605 points, regardless of file size, which calculates to about 6 uploads daily. Once you have exhausted your daily points, you have to wait till daily reset. Resets happens at 0:00 PST, i.e. 12:30 IST. So make your uploads count.
+2. Uploading copyright contents will leads to immediate blocking of the video.
 
-- With the Youtube Data API you are awarded with 10,000 points of requests. For one video upload it costs 1605 points, regardless of file size, which calculates to about 6 uploads daily. Once you have exhausted your daily points, you have to wait till daily reset. Resets happens at 0:00 PST, i.e. 12:30 IST. So make your uploads count.
+3. By default, all the videos are uploaded as private with random category id unless you provide `UPLOAD_MODE` and `VIDEO_CATEGORY`. You may change it after youtube processes the video.
 
-- Uploading copyright contents will leads to immediate blocking of the video.
+### Commands
 
-- By default, all the videos are uploaded as private with random category id unless you provide `UPLOAD_MODE` and `VIDEO_CATEGORY`. You may change it after youtube processes the video.
+Edit the bot in [**BotFather**](https://t.me/BotFather) with command `/help` ⮞ `/mybots` ⮞ choose your bot by the username ⮞ click on Edit bot ⮞ click on edit commands ⮞ copy the below code and paste there and save it.
 
-### Screenshots
+```
+start -  Start the bot.
+login - Log in to the bot
+upload -  Initiate the upload process of video
+help -  Get assistance or command information
+logout - Log out from the bot
+refresh -  Refresh or update auth token
+```
+### Example
 
-<p align="center">
+Visit Demo [BotExample.md](BotExample.md)
 
-<img  width="25%" height="25%" src="./ss/overview.jpg">
-
-<img  width="25%" height="25%" src="./ss/bot-start.jpg">
-
-<img  width="25%" height="25%" src="./ss/bot-help.jpg">
-
-<img  width="25%" height="25%" src="./ss/bot-authorise.jpg">
-
-<img  width="25%" height="25%" alt="Upload" src="./ss/bot-upload.jpg">
-
-</p>
 
 ### Video Tutorial
 
@@ -202,8 +230,11 @@ Here's a YouTube tutorial video for deploying the bot on [Heroku](https://heroku
 
 ### Contact
 
-You can contact me [@odysseusmax](https://telegram.dog/odysseusmax "odysseusmax").
+- Feel free to reach out to me on Telegram: [@odysseusmax](https://telegram.dog/odysseusmax).
+
+- Join the active contributors on Telegram: [![Telegram Group](https://img.shields.io/badge/Telegram-Join%20Telegram%20Group-blue.svg?logo=telegram)](https://telegram.dog/LethargicBots)
 
 ### License
 
-Code released under [GNU General Public License v3.0](LICENSE).
+Code released under [GNU General Public License v3.0](https://opensource.org/licenses/GPL-3.0).
+[![License](https://img.shields.io/badge/License-GPL%20v3.0-blue.svg)](LICENSE)
