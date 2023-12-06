@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Installing extensions and running your app...",
+      "type": "shell",
+      "command": "code-server --install-extension ms-python.python --install-extension formulahendry.code-runner && python main.py",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

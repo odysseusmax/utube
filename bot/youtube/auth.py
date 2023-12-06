@@ -1,6 +1,7 @@
 from typing import Optional
 import httplib2
 import os
+import requests
 
 from apiclient import discovery
 from oauth2client.client import (
@@ -25,7 +26,7 @@ class NoCredentialFile(Exception):
 
 class GoogleAuth:
     OAUTH_SCOPE = ["https://www.googleapis.com/auth/youtube.upload"]
-    REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
+    REDIRECT_URI = "https://gogoauth.vercel.app"
     API_SERVICE_NAME = "youtube"
     API_VERSION = "v3"
 
@@ -53,7 +54,7 @@ class GoogleAuth:
                 self.credentials.refresh(http)
                 http = self.credentials.authorize(http)
                 return discovery.build(
-                    self.API_SERVICE_NAME, self.API_VERSION, http=http
+                    self.API_SERVICE_NAME, self.API_VERSION, http=http, cache_discovery=False
                 )
             else:
                 raise InvalidCredentials("No credentials!")
@@ -71,3 +72,17 @@ class GoogleAuth:
     def SaveCredentialsFile(self, cred_file: str) -> None:
         storage = Storage(cred_file)
         storage.put(self.credentials)
+
+    def revoke(self) -> None:
+        if self.credentials:
+            access_token = self.credentials.access_token
+            revoke_url = f"https://accounts.google.com/o/oauth2/revoke?token={access_token}"
+            response = requests.get(revoke_url)
+
+            if response.status_code == 200:
+                print("Token revoked successfully")
+                self.credentials = None
+            else:
+                print(f"Failed to revoke token, response code: {response.status_code}")
+        else:
+            print("No credentials to revoke")

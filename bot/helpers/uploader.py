@@ -3,7 +3,6 @@ import random
 import asyncio
 import logging
 from typing import Optional, Tuple
-
 from ..youtube import GoogleAuth, YouTube
 from ..config import Config
 
@@ -12,9 +11,11 @@ log = logging.getLogger(__name__)
 
 
 class Uploader:
-    def __init__(self, file: str, title: Optional[str] = None):
+    def __init__(self, file: str, user_id: int, title: Optional[str] = None):
         self.file = file
         self.title = title
+        self.user_id = user_id
+
         self.video_category = {
             1: "Film & Animation",
             2: "Autos & Vehicles",
@@ -36,9 +37,7 @@ class Uploader:
     async def start(self, progress: callable = None, *args) -> Tuple[bool, str]:
         self.progress = progress
         self.args = args
-
         await self._upload()
-
         return self.status, self.message
 
     async def _upload(self) -> None:
@@ -47,13 +46,13 @@ class Uploader:
 
             auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
 
-            if not os.path.isfile(Config.CRED_FILE):
-                log.debug(f"{Config.CRED_FILE} does not exist")
+            if not os.path.isfile(Config.CRED_FILE(self.user_id)):
+                log.debug(f"{Config.CRED_FILE(self.user_id)} does not exist")
                 self.status = False
-                self.message = "Upload failed because you did not authenticate me."
+                self.message = "Upload failed because you did not authenticate me🔐."
                 return
 
-            auth.LoadCredentialsFile(Config.CRED_FILE)
+            auth.LoadCredentialsFile(Config.CRED_FILE(self.user_id))
             google = await loop.run_in_executor(None, auth.authorize)
             if Config.VIDEO_CATEGORY and Config.VIDEO_CATEGORY in self.video_category:
                 categoryId = Config.VIDEO_CATEGORY
@@ -67,10 +66,7 @@ class Uploader:
                 .replace("<", "")
                 .replace(">", "")[:100]
             )
-            description = (
-                Config.VIDEO_DESCRIPTION
-                + "\nUploaded to YouTube with https://tx.me/youtubeitbot"
-            )[:5000]
+            description = (Config.VIDEO_DESCRIPTION)[:5000]
             if not Config.UPLOAD_MODE:
                 privacyStatus = "private"
             else:
@@ -95,10 +91,13 @@ class Uploader:
             video_id = r["id"]
             self.status = True
             self.message = (
-                f"[{title}](https://youtu.be/{video_id}) uploaded to YouTube under category "
-                f"{categoryId} ({categoryName})"
+                f"Title: {title}\n Link: https://youtu.be/{video_id}"
+                f"\n\nCategory ID: {categoryName} | Category Code: {categoryId}\n**[Join Me](https://t.me/LethargicBots) | [@Ankit Kumar](https://github.com/alpha-alexxx)**"
+                f"\n **Original Creator➤ [@Christy Roys](https://github.com/odysseusmax)**"
             )
+            os.remove(self.file)
         except Exception as e:
             log.error(e, exc_info=True)
             self.status = False
-            self.message = f"Error occuered during upload.\nError details: {e}"
+            self.message = f"You got error while uploading: \n\n {e}"
+            os.remove(self.file)
