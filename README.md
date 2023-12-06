@@ -120,7 +120,7 @@ Certainly! To obtain the `CLIENT_ID` and `CLIENT_SECRET` for the YouTube Data AP
 
 1.  In the Google Cloud Console, navigate to the [Credentials page](https://console.cloud.google.com/apis/credentials).
 2.  Click **Create Credentials** and select **OAuth client ID**.
-3.  Choose **Desktop App** as the application type.
+3.  Choose **Web Application** as the application type.
 4.  Enter a name - `Youtube Uploader` for your OAuth client.
 5.  Click **Create**.
 
